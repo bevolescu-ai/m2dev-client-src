@@ -288,6 +288,8 @@ CPythonSystem::TConfig * CPythonSystem::GetConfig()
 void CPythonSystem::SetConfig(TConfig * pNewConfig)
 {
 	m_Config = *pNewConfig;
+	m_RequestedWidth = m_Config.width;
+	m_RequestedHeight = m_Config.height;
 }
 
 void CPythonSystem::SetDefaultConfig()
@@ -296,6 +298,8 @@ void CPythonSystem::SetDefaultConfig()
 
 	m_Config.width				= 1024;
 	m_Config.height				= 768;
+        m_RequestedWidth = m_Config.width;
+        m_RequestedHeight = m_Config.height;
 	m_Config.bpp				= 32;
 
 	m_Config.bWindowed			= false;
@@ -464,6 +468,9 @@ bool CPythonSystem::LoadConfig()
 			m_Config.bShowSalesText = atoi(value) == 1 ? true : false;
 	}
 
+	m_RequestedWidth = m_Config.width;
+	m_RequestedHeight = m_Config.height;
+
 	if (m_Config.bWindowed)
 	{
 		unsigned screen_width = GetSystemMetrics(SM_CXFULLSCREEN);
@@ -523,8 +530,8 @@ bool CPythonSystem::SaveConfig()
 				"SAVE_ID					%s\n"
 				"PRE_LOADING_DELAY_TIME		%d\n"
 				"DECOMPRESSED_TEXTURE		%d\n",
-				m_Config.width,
-				m_Config.height,
+				m_RequestedWidth,
+				m_RequestedHeight,
 				m_Config.bpp,
 				m_Config.frequency,
 				m_Config.is_software_cursor,

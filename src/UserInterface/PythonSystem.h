@@ -163,6 +163,8 @@ class CPythonSystem : public CSingleton<CPythonSystem>
 
 		TConfig							m_Config;
 		TConfig							m_OldConfig;
+		DWORD m_RequestedWidth;
+		DWORD m_RequestedHeight;
 
 		bool							m_isInterfaceConfig;
 		PyObject *						m_poInterfaceHandler;
